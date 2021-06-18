@@ -1,11 +1,13 @@
 import './App.scss';
-import Timer from './Timer';
+import Header from './Components/Header';
+import Timer from './Components/Timer';
+
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <Timer />
-      <p>Hello World</p>
     </div>
   );
 }

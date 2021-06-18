@@ -11,6 +11,3 @@ This is a exercise to train React, Sass and Bootstrap 5. A simple clone of https
 - [ ] Save tasks locally
 - [ ] Login 
 - [ ] Settings
-
-### Mandatory
-  → Use TDD (Jest or React-tests)
