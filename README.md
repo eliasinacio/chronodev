@@ -6,7 +6,8 @@ This is a exercise to train React, Sass and Bootstrap 5. A simple clone of https
 - [ ] Jump cycles 25 → 5 ... → 15
 - [ ] Simple tasks system.
 - [ ] Tasks with description.
----
+
+### Secondary goals
 - [ ] Save tasks locally
 - [ ] Login 
 - [ ] Settings
