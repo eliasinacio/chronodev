@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import '../styles/timer.scss'
 
@@ -20,10 +21,33 @@ export function Timer () {
     
     setSec(0);
   }
-
+  
   const displayMinutes = min > 9 ? min : `0${min}`
   const displaySeconds = sec > 9 ? sec : `0${sec}`
+  
+  useEffect(()=>{
+    if (!paused) {
+      var interval = setInterval(()=>{
+        if (min === 0 && sec === 1) pauseTimer(true);
+        
+        if (sec === 0) {
+          setSec(59);
+          setMin(min-1);
+        } else {
+          setSec(sec-1);
+        }
+        
+      }, 1000);
+    }
 
+    document.title = `${displayMinutes}:${displaySeconds} Don't stop!`
+    
+    return () => {
+      clearInterval(interval);
+    }
+  // eslint-disable-next-line
+  }, [paused, min, sec]);
+  
   return (
     <main>
       <div className="container">
