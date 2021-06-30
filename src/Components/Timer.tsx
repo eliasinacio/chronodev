@@ -44,7 +44,7 @@ export function Timer () {
       }
     }
 
-    document.title = `${displayMinutes}:${displaySeconds} Don't stop!`
+    document.title = `${displayMinutes}:${displaySeconds} - Don't stop!`
     
     return () => {
       clearInterval(interval);

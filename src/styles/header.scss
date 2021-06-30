@@ -7,7 +7,7 @@ header {
 
   padding: 20px 10px 10px;
 
-  border-bottom: 5px solid #00000033;
+  border-bottom: 2px solid #00000033;
 
   a {
     display: flex;
@@ -21,14 +21,16 @@ header {
     }
   } 
 
+  img {
+    width: 48px;
+    height: 48px;
+  }
 
   #github {
-
     img {
       width: 32px;
       height: 32px;
     }
-
-    @media (max-width: 600px) { h4 { display: none; } }
+    @media (max-width: 600px) { p { display: none; } }
   }
 }
