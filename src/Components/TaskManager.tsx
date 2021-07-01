@@ -1,8 +1,14 @@
 import { NewTask } from './NewTask'
 
 import '../styles/task.scss'
+import { useState } from 'react'
 
 export function TaskManager () {
+  const [ formIsHidden, setFormISHidden ] = useState(true);
+
+  function hiddenForm () {
+    setFormISHidden(!formIsHidden);
+  }
 
   return (
     <section>
@@ -12,13 +18,17 @@ export function TaskManager () {
       </div>
 
       <div className="addTask-button">
-        <button onClick={ () => <NewTask /> }>
+        <button 
+          hidden={!formIsHidden}
+          onClick={ () => setFormISHidden(false) }
+        >
           + Add new Task
         </button>
       </div>
-        <NewTask />
+      
+      { !formIsHidden && (<NewTask closeModal={ hiddenForm }/>) }
 
-      <div className='tasks-list'>
+      <div className='tasks-list' hidden>
         <ul>
           <li>
             <label>
