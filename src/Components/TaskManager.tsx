@@ -1,7 +1,26 @@
+import { useState } from 'react'
+
 import { NewTask } from './NewTask'
+import { MenuIcon } from './MenuIcon'
 
 import '../styles/task.scss'
-import { useState } from 'react'
+import { TaskListItem } from './TaskListItem'
+
+const tasksList = [
+  {
+    title: 'Finish this project',
+    cycles: [1, 2],
+    body: 'I need Fix all errors, finish the project, close the form modal...'
+  }, {
+    title: 'Init the store project',
+    cycles: [1, 1],
+    body: 'Organize and start planning all things of the project for the store "dos cara"'
+  }, {
+    title: 'Task de test man',
+    cycles: [1, 4],
+    body: 'Lorem ipsum dolor sit amet as riot focus fomi ofdet.'
+  }
+]
 
 export function TaskManager () {
   const [ formIsHidden, setFormISHidden ] = useState(true);
@@ -14,7 +33,7 @@ export function TaskManager () {
     <section>
       <div className="tasks-header">
         <h4>Your Tasks</h4>
-        <span>...</span>
+        <MenuIcon />
       </div>
 
       <div className="addTask-button">
@@ -25,20 +44,24 @@ export function TaskManager () {
           + Add new Task
         </button>
       </div>
-      
-      { !formIsHidden && (<NewTask closeModal={ hiddenForm }/>) }
 
-      <div className='tasks-list' hidden>
+      <div className='tasks-list'>
         <ul>
-          <li>
-            <label>
-              <input type="checkbox" name="" id="" />
-              <h4>First Task Test</h4>
-              <p>Task description</p>
-            </label>
-          </li>
+          { tasksList.map( (task, key) => {
+            return (
+              <TaskListItem 
+                title={task.title}
+                body={task.body}
+                cycles={task.cycles}
+                key={key}
+                id={key}
+              />
+            )})}
         </ul>
       </div>
+
+      { !formIsHidden && (<NewTask closeModal={ hiddenForm }/>) }
+
     </section>
   )
 }

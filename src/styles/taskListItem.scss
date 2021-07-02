@@ -1,0 +1,71 @@
+li {
+  margin-bottom: 10px;
+  border-radius: 5px;
+
+  border-left: 6px solid #67ab78;
+
+  padding: 16px 12px;
+  
+  background-color: #FDFDFD;
+  
+  color: #434343;
+
+  label:hover {
+    svg path {
+      fill: #85629caa;
+    }
+  }
+
+  input[type='checkbox'] {
+    display: none;
+
+    &:checked + label {
+      svg path {
+        fill: blueviolet;
+      }
+    }
+  }
+
+  .task-header {
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr 1fr;
+    text-align: start;
+    padding: 5px 0;
+  }
+
+  label {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .task-title {
+    cursor: pointer;
+  }
+
+  .task-body {
+    margin: 10px 10px 10px 20px;
+    padding: 10px;
+    border-radius: 2px;
+    background-color: #67ab7865;
+    color: #434343;
+  }
+
+  .task-cycles {
+    margin-top: 4px;
+    color: #43434399;
+  }
+
+  .deleteIcon {
+    width: 30px;
+    height: 30px;
+    margin-top: -3px;
+    cursor: pointer;
+  }
+
+  .deleteIcon:hover {
+    &:hover {
+      fill: #ff4b4b;
+    }
+  }
+
+}
