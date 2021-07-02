@@ -3,7 +3,7 @@ import React, { FormEvent, useState } from 'react'
 import '../styles/newTask.scss'
 
 type newTaskFormProps = {
-  closeModal: React.Dispatch<React.SetStateAction<boolean>>
+  closeModal: Function,
 }
 
 type formFieldsTypes = {

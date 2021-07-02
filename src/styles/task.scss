@@ -22,25 +22,6 @@ section {
     h4 {
       align-self: flex-end;
     }
-
-    span {
-      transform: rotate(-90deg);
-      border-radius: 5px;
-      padding: 0 8px 12px;
-      cursor: pointer;
-      font-size: 20px;
-      background-color: #FFFFFF1f;
-    
-      &:hover {
-        background-color: #FFFFFF15;
-      }
-
-      &:active {
-        margin-top: 2px;
-        margin-bottom: -2px;
-        margin-right: -1px;
-      }
-    }
   }
 
   .addTask-button {
@@ -74,11 +55,13 @@ section {
     text-align: start;
   }
 
-  .tasklist {
+  .tasks-list {
     margin-top: 20px;
+    max-width: 500px;
 
-    color: white;
     width: 100%;
 
+    li { list-style-type: none; }
+    // input[type="checkbox"] { display: none; }
   }
 }
