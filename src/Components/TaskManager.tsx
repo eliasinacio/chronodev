@@ -1,67 +1,51 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { TasksContext, TasksContextProvider } from '../contexts/TasksContext';
 
-import { NewTask } from './NewTask'
+import { NewTaskForm } from './NewTaskForm'
 import { MenuIcon } from './MenuIcon'
 
 import '../styles/task.scss'
 import { TaskListItem } from './TaskListItem'
 
-const tasksList = [
-  {
-    title: 'Finish this project',
-    cycles: [1, 2],
-    body: 'I need Fix all errors, finish the project, close the form modal...'
-  }, {
-    title: 'Init the store project',
-    cycles: [1, 1],
-    body: 'Organize and start planning all things of the project for the store "dos cara"'
-  }, {
-    title: 'Task de test man',
-    cycles: [1, 4],
-    body: 'Lorem ipsum dolor sit amet as riot focus fomi ofdet.'
-  }
-]
-
 export function TaskManager () {
-  const [ formIsHidden, setFormISHidden ] = useState(true);
-
-  function hiddenForm () {
-    setFormISHidden(!formIsHidden);
-  }
+  const [ formIsHidden, setFormIsHidden ] = useState(true);
+  const value = useContext(TasksContext);
+  const TasksList = value.tasks || [];
 
   return (
-    <section>
-      <div className="tasks-header">
-        <h4>Your Tasks</h4>
-        <MenuIcon />
-      </div>
+    <TasksContextProvider>
+      <section>
+        <header className="tasks-header">
+          <h4>Your Tasks</h4>
+          <MenuIcon />
+        </header>
 
-      <div className="addTask-button">
-        <button 
-          hidden={!formIsHidden}
-          onClick={ () => setFormISHidden(false) }
-        >
-          + Add new Task
-        </button>
-      </div>
+        <div className="addTask-button">
+          <button 
+            hidden={!formIsHidden}
+            onClick={ () => setFormIsHidden(false) }
+          >
+            + Add new Task
+          </button>
+        </div>
 
-      <div className='tasks-list'>
-        <ul>
-          { tasksList.map( (task, key) => {
-            return (
-              <TaskListItem 
-                title={task.title}
-                body={task.body}
-                cycles={task.cycles}
-                key={key}
-                id={key}
-              />
-            )})}
-        </ul>
-      </div>
+        <div className='tasks-list'>
+          <ul>
+            { (TasksList !== null) && TasksList.map( (task, key) => {
+              return (
+                <TaskListItem 
+                  title={task.title}
+                  body={task.body}
+                  cycles={task.cycles}
+                  id={key}
+                />
+              )})}
+          </ul>
+        </div>
 
-      { !formIsHidden && (<NewTask closeModal={ hiddenForm }/>) }
+        { !formIsHidden && (<NewTaskForm closeModal={ () => setFormIsHidden(!formIsHidden) }/>) }
 
-    </section>
+      </section>
+    </TasksContextProvider>
   )
 }

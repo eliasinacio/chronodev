@@ -1,4 +1,5 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useState, useContext } from 'react'
+import { TasksContext } from '../contexts/TasksContext';
 
 import '../styles/newTask.scss'
 
@@ -12,9 +13,11 @@ type formFieldsTypes = {
   body?: string
 }
 
-export function NewTask ( props: newTaskFormProps) {
+export function NewTaskForm ( props: newTaskFormProps) {
   const [ textareaIsHidden, setTextareaIsHidden ] = useState(true);
   const [ formFields, setFormFields  ] = useState({title: '', cycles: 0, body: ''} as formFieldsTypes)
+  
+  const { setTask } = useContext(TasksContext);
 
   function handleSubmitNewTask (event: FormEvent) {
     event.preventDefault();
@@ -24,7 +27,9 @@ export function NewTask ( props: newTaskFormProps) {
       return;
     }
 
-    console.log(formFields);
+    let task = formFields;
+
+    setTask(task)
   }
 
   return (
@@ -75,7 +80,7 @@ export function NewTask ( props: newTaskFormProps) {
       <footer>
         <button
           type='button' 
-          onClick={ () => props.closeModal }
+          onClick={ () => props.closeModal(true) }
           >Cancel</button>
         <button 
           type='submit'

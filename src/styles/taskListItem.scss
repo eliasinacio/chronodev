@@ -24,6 +24,11 @@ li {
         fill: blueviolet;
       }
     }
+
+    &:checked ~ h3.task-title {
+      text-decoration: line-through;
+      color: #43434383;
+    }
   }
 
   .task-header {
@@ -40,6 +45,8 @@ li {
 
   .task-title {
     cursor: pointer;
+
+    
   }
 
   .task-body {
