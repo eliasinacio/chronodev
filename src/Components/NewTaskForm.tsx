@@ -29,7 +29,9 @@ export function NewTaskForm ( props: newTaskFormProps) {
 
     let task = formFields;
 
-    setTask(task)
+    setTask(task);
+
+    props.closeModal(true);
   }
 
   return (

@@ -10,7 +10,7 @@ import { TaskListItem } from './TaskListItem'
 export function TaskManager () {
   const [ formIsHidden, setFormIsHidden ] = useState(true);
   const value = useContext(TasksContext);
-  const TasksList = value.tasks || [];
+  const TasksList = value.tasks;
 
   return (
     <TasksContextProvider>
@@ -31,15 +31,19 @@ export function TaskManager () {
 
         <div className='tasks-list'>
           <ul>
-            { (TasksList !== null) && TasksList.map( (task, key) => {
-              return (
-                <TaskListItem 
-                  title={task.title}
-                  body={task.body}
-                  cycles={task.cycles}
-                  id={key}
-                />
-              )})}
+            { 
+              (TasksList) ? 
+                TasksList.map( (task, key) => {
+                  return (
+                    <TaskListItem 
+                      title={task.title}
+                      body={task.body}
+                      cycles={task.cycles}
+                      id={key}
+                    />
+                  )
+                }) : ''
+            }
           </ul>
         </div>
 

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { createContext, ReactNode } from "react";
 
@@ -20,16 +19,25 @@ type TasksContextProviderProps = {
 export const TasksContext = createContext({} as TasksContextType);
 
 export function TasksContextProvider ({children}: TasksContextProviderProps) {
-  const [ tasks, setTasks ] = useState([{} as Task]);
+  let storedTasksList = localStorage.getItem('tasks');
+  storedTasksList = JSON.parse(storedTasksList || '');
 
-  useEffect(()=> {
-    const taskslist = JSON.parse(localStorage.getItem('tasks') || "") || {}
+  storedTasksList = Object(storedTasksList);
 
-    setTasks(taskslist);
-  }, []);
+  const [ tasks, setTasks ] = useState<Array<Task>>([{title: 'a', body: 'a', cycles: 2}]);
 
-  function setTask (task: Task) {
-    localStorage.setItem('tasks', JSON.stringify(task));
+  function setTask (newTask: Task) {
+    console.log(tasks, storedTasksList);
+
+    const task = {
+      title: newTask.title,
+      body: newTask.body,
+      cycles: newTask.cycles
+    }
+
+    localStorage.setItem('tasks', JSON.stringify(tasks.concat(task)));
+
+    setTasks(tasks.concat(task));
   }
 
   return (
@@ -38,3 +46,4 @@ export function TasksContextProvider ({children}: TasksContextProviderProps) {
     </TasksContext.Provider>
   )
 }
+
