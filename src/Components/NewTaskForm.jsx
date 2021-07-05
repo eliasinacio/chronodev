@@ -4,7 +4,7 @@ import '../styles/newTask.scss'
 
 export function NewTaskForm (props) {
   const [ textareaIsHidden, setTextareaIsHidden ] = useState(true);
-  const [ formFields, setFormFields  ] = useState({title: '', cycles: 0, body: ''});
+  const [ formFields, setFormFields ] = useState({title: '', cycles: 0, body: '', completed: false});
 
   function handleSubmitNewTask (event) {
     event.preventDefault();
@@ -15,6 +15,7 @@ export function NewTaskForm (props) {
     }
 
     let newTask = formFields;
+    newTask.completed = false;
     
     let storedTasks = (localStorage.getItem('tasks') !== null) ? JSON.parse(localStorage.getItem('tasks')) : [];
     storedTasks.push(newTask);

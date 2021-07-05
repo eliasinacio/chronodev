@@ -23,6 +23,7 @@ export function Timer () {
   
   useEffect(()=>{
     if (!paused) {
+      document.title = `${displayMinutes}:${displaySeconds} - Don't stop!`
       var interval = setInterval( ()=>{
         if (sec === 0) {
           if (min === 0) {
@@ -41,10 +42,8 @@ export function Timer () {
         setSec(0);
         changeNow(false);
       }
-    }
+    }    
 
-    document.title = `${displayMinutes}:${displaySeconds} - Don't stop!`
-    
     return () => {
       clearInterval(interval);
     }

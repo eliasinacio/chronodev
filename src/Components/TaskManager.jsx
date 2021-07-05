@@ -11,7 +11,6 @@ export function TaskManager () {
   const [ formIsHidden, setFormIsHidden ] = useState(true);
 
   const [ tasks, setTasks ]  = useState([]);
-  console.log(tasks);
 
   useEffect( () => {
     setTasks(
@@ -42,6 +41,7 @@ export function TaskManager () {
                             title={task.title}
                             body={task.body}
                             cycles={task.cycles}
+                            completed={task.completed}
                             key={key}
                             id={key}
                             updateTasks={{tasks, setTasks}}
