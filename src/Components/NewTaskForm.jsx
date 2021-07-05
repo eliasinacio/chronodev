@@ -1,36 +1,26 @@
-import React, { FormEvent, useState, useContext } from 'react'
-import { TasksContext } from '../contexts/TasksContext';
+import { useState } from 'react'
 
 import '../styles/newTask.scss'
 
-type newTaskFormProps = {
-  closeModal: Function,
-}
-
-type formFieldsTypes = {
-  title: string, 
-  cycles: number, 
-  body?: string
-}
-
-export function NewTaskForm ( props: newTaskFormProps) {
+export function NewTaskForm (props) {
   const [ textareaIsHidden, setTextareaIsHidden ] = useState(true);
-  const [ formFields, setFormFields  ] = useState({title: '', cycles: 0, body: ''} as formFieldsTypes)
-  
-  const { setTask } = useContext(TasksContext);
+  const [ formFields, setFormFields  ] = useState({title: '', cycles: 0, body: ''});
 
-  function handleSubmitNewTask (event: FormEvent) {
+  function handleSubmitNewTask (event) {
     event.preventDefault();
 
     if (formFields.title.trim() === '') {
-      alert('add a title for you task')
+      alert('Add a title for you task.')
       return;
     }
 
-    let task = formFields;
+    let newTask = formFields;
+    
+    let storedTasks = (localStorage.getItem('tasks') !== null) ? JSON.parse(localStorage.getItem('tasks')) : [];
+    storedTasks.push(newTask);
+    window.localStorage.setItem('tasks', JSON.stringify(storedTasks));
 
-    setTask(task);
-
+    props.updateTasks.setTasks(storedTasks);
     props.closeModal(true);
   }
 

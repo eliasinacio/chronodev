@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import '../styles/timer.scss'
 
 export function Timer () {
@@ -10,7 +9,7 @@ export function Timer () {
   const [ min, setMin ] = useState(25);
   const [ sec, setSec ] = useState(0);
   
-  function handleSetTimeTo (selected: number) {
+  function handleSetTimeTo (selected) {
     
     setSelectedTimer(selected);
     
