@@ -22,7 +22,6 @@
 <footer>
  <p align='center'>Made by <a href='https://github.com/eliasinacio'>me</a> with 💜 and </p>
  <p align='center'>
-  <img src="https://img.icons8.com/color/36/000000/typescript.png"/>
   <img src="https://img.icons8.com/officel/36/000000/react.png"/>
   <img src="https://img.icons8.com/color/36/000000/sass.png"/>
  </p>
