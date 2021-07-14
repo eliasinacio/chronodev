@@ -47,7 +47,7 @@ export function TaskManager () {
                             updateTasks={{tasks, setTasks}}
                           />
                         )})
-                    : <p>Não há tasks</p> 
+                    : <p>0 tasks</p> 
               }    
           </ul>
         </div>
