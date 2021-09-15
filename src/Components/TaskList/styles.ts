@@ -1,4 +1,6 @@
-section {
+import styled from 'styled-components';
+
+export const Container = styled.section`
   padding: 20px;
   
   width: 100%;
@@ -64,4 +66,4 @@ section {
     li { list-style-type: none; }
     // input[type="checkbox"] { display: none; }
   }
-}
+`;

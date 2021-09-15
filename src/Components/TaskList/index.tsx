@@ -1,25 +1,23 @@
 import { useState } from 'react'
-
-import { NewTaskForm } from './Form/NewTaskForm'
-
-import '../styles/task.scss'
-import { TaskListItem } from './TaskItem/TaskListItem'
-
 import { useEffect } from 'react'
 
-export function TaskManager () {
+import { TaskItem } from '../TaskItem'
+import { Form } from '../Form'
+import { Container } from './styles';
+
+export function TaskList () {
   const [ formIsHidden, setFormIsHidden ] = useState(true);
 
   const [ tasks, setTasks ]  = useState([]);
 
   useEffect( () => {
     setTasks(
-      JSON.parse(localStorage.getItem('tasks'))
+      JSON.parse(localStorage.getItem('tasks') as any /** ATENÇÃO AQUI */)
     )
   }, []);
 
   return (
-      <section>
+      <Container>
         <header className="tasks-header">
           <h4>Your Tasks</h4>
         </header>
@@ -37,13 +35,13 @@ export function TaskManager () {
           <ul>
             { tasks ? tasks.map((task, key) => {
                         return (
-                          <TaskListItem 
-                            title={task.title}
-                            body={task.body}
-                            cycles={task.cycles}
-                            completed={task.completed}
-                            key={key}
-                            id={key}
+                          <TaskItem 
+                            title={"task.title"}
+                            body={"task.body"}
+                            cycles={"task.cycles"}
+                            completed={"task.completed"}
+                            key={"key"}
+                            id={"key"}
                             updateTasks={{tasks, setTasks}}
                           />
                         )})
@@ -52,11 +50,11 @@ export function TaskManager () {
           </ul>
         </div>
 
-        { !formIsHidden && (<NewTaskForm 
+        { !formIsHidden && (<Form 
                               closeModal={ () => setFormIsHidden(!formIsHidden) }
                               updateTasks={ {tasks, setTasks} }
                             />) }
 
-      </section>
+      </Container>
   )
 }

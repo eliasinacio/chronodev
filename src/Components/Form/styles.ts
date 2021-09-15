@@ -1,4 +1,6 @@
-.newTask-container {
+import styled from 'styled-components';
+
+export const Container = styled.form`
   margin-top: 20px;
   
   padding: 20px;
@@ -146,4 +148,4 @@
       }
     }
   }
-}
+`;

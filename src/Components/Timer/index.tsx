@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import '../styles/timer.scss'
+import { Container } from "./styles";
 
 export function Timer () {
   
@@ -9,7 +9,7 @@ export function Timer () {
   const [ min, setMin ] = useState(25);
   const [ sec, setSec ] = useState(0);
   
-  function handleSetTimeTo (selected) {
+  function handleSetTimeTo (selected: any /** ATENÇÃO AQUI */) {
     
     setSelectedTimer(selected);
     
@@ -51,7 +51,7 @@ export function Timer () {
   }, [paused, min, sec]);
   
   return (
-    <main>
+    <Container>
       <div className="container">
         <div className="buttons">
           <button 
@@ -102,6 +102,6 @@ export function Timer () {
 
       </div>
 
-    </main>
+    </Container>
   )
 }

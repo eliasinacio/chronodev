@@ -1,4 +1,6 @@
-li {
+import styled from 'styled-components';
+
+export const Container = styled.li`
   margin-bottom: 10px;
   border-radius: 5px;
 
@@ -45,8 +47,6 @@ li {
 
   .task-title {
     cursor: pointer;
-
-    
   }
 
   .task-body {
@@ -75,4 +75,4 @@ li {
     }
   }
 
-}
+`;

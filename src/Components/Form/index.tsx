@@ -1,12 +1,11 @@
 import { useState } from 'react'
+import { Container } from './styles';
 
-import '../styles/newTask.scss'
-
-export function NewTaskForm (props) {
+export function Form (props: any /** ATENÇÃO AQUI */) {
   const [ textareaIsHidden, setTextareaIsHidden ] = useState(true);
   const [ formFields, setFormFields ] = useState({title: '', cycles: 0, body: '', completed: false});
 
-  function handleSubmitNewTask (event) {
+  function handleSubmitNewTask (event: any /** ATENÇÃO AQUI */) {
     event.preventDefault();
 
     if (formFields.title.trim() === '') {
@@ -17,7 +16,7 @@ export function NewTaskForm (props) {
     let newTask = formFields;
     newTask.completed = false;
     
-    let storedTasks = (localStorage.getItem('tasks') !== null) ? JSON.parse(localStorage.getItem('tasks')) : [];
+    let storedTasks = (localStorage.getItem('tasks') !== null) ? JSON.parse(localStorage.getItem('tasks') as any /** ATENÇÃO AQUI */) : [];
     storedTasks.push(newTask);
     window.localStorage.setItem('tasks', JSON.stringify(storedTasks));
 
@@ -26,7 +25,7 @@ export function NewTaskForm (props) {
   }
 
   return (
-    <form className='newTask-container' onSubmit={ handleSubmitNewTask }>
+    <Container className='newTask-container' onSubmit={ handleSubmitNewTask }>
       <input 
         type="text" 
         name="task-title" 
@@ -80,6 +79,6 @@ export function NewTaskForm (props) {
           id='save-button'
           >Save</button>
       </footer>
-    </form>
+    </Container>
   )
 }

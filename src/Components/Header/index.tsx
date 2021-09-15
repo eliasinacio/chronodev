@@ -1,8 +1,8 @@
-import '../styles/header.scss'
+import { Container } from "./styles"
 
 export function Header () {
   return (
-    <header>
+    <Container>
       <div id="home">          
         <a href="https://github.com/eliasinacio/react-pomofocus-clone/" target="_blank"  rel="noreferrer">
           <img src="https://img.icons8.com/pastel-glyph/100/ffffff/square-clock.png" alt="A simple square clock icon"/>
@@ -16,6 +16,6 @@ export function Header () {
           <p>GitHub</p>
         </a>
       </div>
-    </header>
+    </Container>
   )
 }

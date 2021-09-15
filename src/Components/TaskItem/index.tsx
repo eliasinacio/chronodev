@@ -1,18 +1,18 @@
-import '../styles/taskListItem.scss'
 import { useState, useEffect } from 'react';
+import { Container } from './styles';
 
-export function TaskListItem (props) {
+export function TaskItem (props: any /** ATENÇÃO AQUI */) {
   const { title, body, cycles, completed, id } = props;
   const [ taskBodyIsHidden, setTaskBodyIsHidden ] = useState(true);
 
-  function handleDeleteTask (taskId) {
+  function handleDeleteTask (taskId: any /** ATENÇÃO AQUI */) {
     let totalTasks = props.updateTasks.tasks;
     totalTasks.splice(taskId, 1);
     window.localStorage.setItem('tasks', JSON.stringify(totalTasks));
     props.updateTasks.setTasks(totalTasks);
   }
 
-  function handleCheckTask (taskId) {
+  function handleCheckTask (taskId: any /** ATENÇÃO AQUI */) {
     let totalTasks = props.updateTasks.tasks;
 
     totalTasks[taskId].completed = !(totalTasks[taskId].completed);
@@ -26,7 +26,7 @@ export function TaskListItem (props) {
   }, [])
 
   return (
-    <li className="task">
+    <Container className="task">
       <div className="task-header">
         <input type="checkbox" onChange={ () => handleCheckTask(id) } checked={completed} name={`task-item${id}`} id={`task-item${id}`} />
         
@@ -55,6 +55,6 @@ export function TaskListItem (props) {
       </div>
       
       <p className="task-body" hidden={taskBodyIsHidden}>{body !== '' && body}</p>
-    </li>
+    </Container>
   )
 }
