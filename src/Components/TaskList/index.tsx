@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { NewTaskForm } from './NewTaskForm'
+import { NewTaskForm } from './Form/NewTaskForm'
 
 import '../styles/task.scss'
-import { TaskListItem } from './TaskListItem'
+import { TaskListItem } from './TaskItem/TaskListItem'
 
 import { useEffect } from 'react'
 
