@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Container } from './styles';
 
 export function Form (props: any /** ATENÇÃO AQUI */) {
   const [ textareaIsHidden, setTextareaIsHidden ] = useState(true);
   const [ formFields, setFormFields ] = useState({title: '', cycles: 0, body: '', completed: false});
 
-  function handleSubmitNewTask (event: any /** ATENÇÃO AQUI */) {
+  function handleSubmitNewTask (event: React.SyntheticEvent) {
     event.preventDefault();
 
     if (formFields.title.trim() === '') {

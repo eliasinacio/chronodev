@@ -1,22 +1,36 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { Component } from 'react'
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
 
-import { TaskItem } from '../TaskItem'
-import { Form } from '../Form'
+import { Task } from '../../store/ducks/tasks/types';
+import { ApplicationState } from '../../store';
+
+import * as TaskActions from '../../store/ducks/tasks/actions'
 import { Container } from './styles';
+import { TaskItem } from '../TaskItem'
 
-export function TaskList () {
-  const [ formIsHidden, setFormIsHidden ] = useState(true);
+interface StateProps {
+  tasks: Task[]
+}
 
-  const [ tasks, setTasks ]  = useState([]);
+interface DispatchProps {
+  getTasks(): any
+}
 
-  useEffect( () => {
-    setTasks(
-      JSON.parse(localStorage.getItem('tasks') as any /** ATENÇÃO AQUI */)
-    )
-  }, []);
+type Props = StateProps & DispatchProps
 
-  return (
+class TaskList extends Component<Props> {
+  componentDidMount() {
+    const { getTasks } = this.props;
+
+    getTasks();
+  }
+
+  render () {
+    const { tasks } = this.props;
+    const formIsHidden = false;
+
+    return (
       <Container>
         <header className="tasks-header">
           <h4>Your Tasks</h4>
@@ -25,7 +39,7 @@ export function TaskList () {
         <div className="addTask-button">
           <button 
             hidden={!formIsHidden}
-            onClick={ () => setFormIsHidden(false) }
+            // onClick={ () => setFormIsHidden(false) }
           >
             + Add new Task
           </button>
@@ -33,16 +47,15 @@ export function TaskList () {
 
         <div className='tasks-list'>
           <ul>
-            { tasks ? tasks.map((task, key) => {
+            { tasks ? tasks.map((task) => {
                         return (
                           <TaskItem 
-                            title={"task.title"}
-                            body={"task.body"}
-                            cycles={"task.cycles"}
-                            completed={"task.completed"}
-                            key={"key"}
-                            id={"key"}
-                            updateTasks={{tasks, setTasks}}
+                            title={task.title}
+                            body={task.body}
+                            cycles={task.cycles}
+                            completed={task.completed}
+                            key={task.id}
+                            id={task.id}
                           />
                         )})
                     : <p>0 tasks</p> 
@@ -50,11 +63,26 @@ export function TaskList () {
           </ul>
         </div>
 
-        { !formIsHidden && (<Form 
-                              closeModal={ () => setFormIsHidden(!formIsHidden) }
-                              updateTasks={ {tasks, setTasks} }
-                            />) }
+        {/* { !formIsHidden && (
+          <Form 
+            closeModal={ () => setFormIsHidden(!formIsHidden) }
+            updateTasks={ {tasks, setTasks} }
+          />
+          ) 
+        } */}
 
       </Container>
-  )
+    )
+  }
 }
+
+const mapStateToProps = (state: ApplicationState) => {
+  tasks: state.tasks.data
+}
+
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(TaskActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
+
+// APENAS FALA O COMPONENTE CONECTAR COM A S PROPS E SER EXPORTADO
+// PARECE ESTAR CONFLITANDO DADOS DO STATE COM OS PASSADOS PARA O COMPONENTE USAR...
