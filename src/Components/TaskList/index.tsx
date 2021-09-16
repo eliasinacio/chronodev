@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
@@ -8,18 +8,35 @@ import { ApplicationState } from '../../store';
 import * as TaskActions from '../../store/ducks/tasks/actions'
 import { Container } from './styles';
 import { TaskItem } from '../TaskItem'
+import { Form } from '../Form';
+
 
 interface StateProps {
   tasks: Task[]
 }
 
 interface DispatchProps {
-  getTasks(): any
+  getTasks: Function;
 }
 
-type Props = StateProps & DispatchProps
+interface State {
+  formIsHidden: boolean
+}
 
-class TaskList extends Component<Props> {
+type Props = StateProps & DispatchProps 
+
+export class TaskList extends React.Component<Props, any> {
+  constructor (props: Props) {
+    super(props);
+
+    this.state = { formIsHidden: false }
+    this.hideForm = this.hideForm.bind(this)
+  }
+
+  hideForm () { 
+    this.setState({ formisHidden: !this.state.formIsHidden })
+  }
+
   componentDidMount() {
     const { getTasks } = this.props;
 
@@ -28,7 +45,6 @@ class TaskList extends Component<Props> {
 
   render () {
     const { tasks } = this.props;
-    const formIsHidden = false;
 
     return (
       <Container>
@@ -38,10 +54,10 @@ class TaskList extends Component<Props> {
 
         <div className="addTask-button">
           <button 
-            hidden={!formIsHidden}
-            // onClick={ () => setFormIsHidden(false) }
+            hidden={ this.state.FormIsHidden }
+            onClick={ this.hideForm }
           >
-            + Add new Task
+            + Add new Task {this.state.FormIsHidden}
           </button>
         </div>
 
@@ -58,31 +74,31 @@ class TaskList extends Component<Props> {
                             id={task.id}
                           />
                         )})
-                    : <p>0 tasks</p> 
+                    : <p>0 tasks </p> 
               }    
           </ul>
         </div>
 
-        {/* { !formIsHidden && (
+        {  
+          !this.state.formIsHidden ? '' : 
           <Form 
-            closeModal={ () => setFormIsHidden(!formIsHidden) }
-            updateTasks={ {tasks, setTasks} }
+            hideForm={ this.state.hideForm }
           />
-          ) 
-        } */}
+        }
 
       </Container>
     )
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => {
+const mapStateToProps = (state: ApplicationState) => ({
   tasks: state.tasks.data
-}
+})
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(TaskActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
 
-// APENAS FALA O COMPONENTE CONECTAR COM A S PROPS E SER EXPORTADO
-// PARECE ESTAR CONFLITANDO DADOS DO STATE COM OS PASSADOS PARA O COMPONENTE USAR...
+
+// a função de alteração de estado não está alterando para esconder ou mostrar o form
+// pode ser problema por ser um componente de classe ou pode ser typescript

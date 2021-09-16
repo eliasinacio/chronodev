@@ -1,6 +1,5 @@
 import { put } from 'redux-saga/effects'
 import { getTasks } from './actions'
-import { Task } from './types';
 
 export function* get(): any {
   try {

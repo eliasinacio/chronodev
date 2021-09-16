@@ -1,9 +1,21 @@
 import React, { useState } from 'react'
+import { Task } from '../../store/ducks/tasks/types';
 import { Container } from './styles';
 
-export function Form (props: any /** ATENÇÃO AQUI */) {
+type FormProps = Task;
+
+interface Props {
+  hideForm: Function;
+  // precisa dos tipos das props passadas para o form
+}
+
+// esse comonente vai acionar uma action de adição de task mandando os dados dela 
+
+// portanto acho que não precisa receber as tasks pois só ficará responsável pelos dados da nova
+
+export function Form (props: Props) {
   const [ textareaIsHidden, setTextareaIsHidden ] = useState(true);
-  const [ formFields, setFormFields ] = useState({title: '', cycles: 0, body: '', completed: false});
+  const [ formFields, setFormFields ] = useState({title: '', cycles: 0, body: '', completed: false} as FormProps);
 
   function handleSubmitNewTask (event: React.SyntheticEvent) {
     event.preventDefault();
@@ -20,8 +32,8 @@ export function Form (props: any /** ATENÇÃO AQUI */) {
     storedTasks.push(newTask);
     window.localStorage.setItem('tasks', JSON.stringify(storedTasks));
 
-    props.updateTasks.setTasks(storedTasks);
-    props.closeModal(true);
+    // props.updateTasks.setTasks(storedTasks);
+    props.hideForm(true)
   }
 
   return (
@@ -72,7 +84,7 @@ export function Form (props: any /** ATENÇÃO AQUI */) {
       <footer>
         <button
           type='button' 
-          onClick={ () => props.closeModal(true) }
+          onClick={ () => props.hideForm(true) }
           >Cancel</button>
         <button 
           type='submit'

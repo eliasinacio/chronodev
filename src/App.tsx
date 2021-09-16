@@ -1,6 +1,6 @@
 import { Header } from './Components/Header';
 import { Timer } from './Components/Timer/';
-import { TaskList } from './Components/TaskList';
+import  TaskList  from './Components/TaskList';
 import { GlobalStyle } from './styles/GlobalStyle';
 import { Provider } from 'react-redux';
 import store from './store';

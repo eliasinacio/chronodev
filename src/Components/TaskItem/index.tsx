@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Task } from '../../store/ducks/tasks/types';
 import { Container } from './styles';
 
