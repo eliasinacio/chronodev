@@ -1,28 +1,30 @@
 import '../styles/taskListItem.scss'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback} from 'react';
 
 export function TaskListItem (props) {
   const { title, body, cycles, completed, id } = props;
   const [ taskBodyIsHidden, setTaskBodyIsHidden ] = useState(true);
 
-  function handleDeleteTask (taskId) {
+  const handleDeleteTask = useCallback((taskId) => {
     let totalTasks = props.updateTasks.tasks;
     totalTasks.splice(taskId, 1);
     window.localStorage.setItem('tasks', JSON.stringify(totalTasks));
     props.updateTasks.setTasks(totalTasks);
-  }
+  }, [props.updateTasks])
 
-  function handleCheckTask (taskId) {
+  const handleCheckTask = useCallback((taskId) => {
+    console.log('check')
     let totalTasks = props.updateTasks.tasks;
 
     totalTasks[taskId].completed = !(totalTasks[taskId].completed);
 
     window.localStorage.setItem('tasks', JSON.stringify(totalTasks));
     props.updateTasks.setTasks(totalTasks);
-  } 
+  }, [props.updateTasks])
 
-  useEffect(()=> {
-
+  useEffect(() => {
+    return () => {
+    }
   }, [])
 
   return (
@@ -30,7 +32,7 @@ export function TaskListItem (props) {
       <div className="task-header">
         <input type="checkbox" onChange={ () => handleCheckTask(id) } checked={completed} name={`task-item${id}`} id={`task-item${id}`} />
         
-        <label htmlFor={`task-item${id}`}>
+        <label htmlFor={`task-item${id}`} className={completed ? 'checked' : ''}>
             <svg width="24px" height="24px" viewBox="0 0 18 18" version="1.1">
               <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                 <g id="Rounded" transform="translate(-103.000000, -4323.000000)">

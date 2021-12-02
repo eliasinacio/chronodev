@@ -33,6 +33,11 @@ export function TaskManager () {
           </button>
         </div>
 
+        { !formIsHidden && (<NewTaskForm 
+                              closeModal={ () => setFormIsHidden(!formIsHidden) }
+                              updateTasks={ {tasks, setTasks} }
+                            />) }
+
         <div className='tasks-list'>
           <ul>
             { tasks ? tasks.map((task, key) => {
@@ -51,12 +56,6 @@ export function TaskManager () {
               }    
           </ul>
         </div>
-
-        { !formIsHidden && (<NewTaskForm 
-                              closeModal={ () => setFormIsHidden(!formIsHidden) }
-                              updateTasks={ {tasks, setTasks} }
-                            />) }
-
       </section>
   )
 }
