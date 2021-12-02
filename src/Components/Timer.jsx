@@ -20,8 +20,18 @@ export function Timer () {
   
   const displayMinutes = min > 9 ? min : `0${min}`
   const displaySeconds = sec > 9 ? sec : `0${sec}`
+
+  const setTimerType = (type) => {
+    if (selectedTimer !== type) {
+      if (paused || window.confirm('Você deseja mesmo cancelar o timer?')) {
+        pauseTimer(true);
+        changeNow(true);
+        handleSetTimeTo(type);
+      }}
+    }
   
   useEffect(()=>{
+    console.log('teste')
     if (!paused) {
       document.title = `${displayMinutes}:${displaySeconds} - Don't stop!`
       var interval = setInterval( ()=>{
@@ -56,41 +66,17 @@ export function Timer () {
         <div className="buttons">
           <button 
             id="pomodoroBtn" className={`btn ${selectedTimer === 1 && 'selected'}`}
-            onClick={ () => {
-              if (selectedTimer !== 1) {
-                if (window.confirm('Você deseja mesmo cancelar o timer?')) {
-                  pauseTimer(true);
-                  changeNow(true);
-                  handleSetTimeTo(1);
-                }}
-              }
-            }>
+            onClick={ () => setTimerType(1) }>
             Pomodoro
           </button>
           <button 
             id="shortBreackBtn" className={`btn ${selectedTimer === 2 && 'selected'}`}
-            onClick={ () => {
-              if (selectedTimer !== 2) {
-                if (window.confirm('Você deseja mesmo cancelar o timer?')) {
-                  pauseTimer(true);
-                  changeNow(true);
-                  handleSetTimeTo(2);
-                }}
-              }
-            }>
+            onClick={ () => setTimerType(2) }>
             Short break
           </button>
           <button 
             id="longBreakBtn" className={`btn ${selectedTimer === 3 && 'selected'}`}
-            onClick={ () => {
-              if (selectedTimer !== 3) {
-                if (window.confirm('Você deseja mesmo cancelar o timer?')) {
-                  pauseTimer(true);
-                  changeNow(true);
-                  handleSetTimeTo(3); 
-                }}
-              }
-            }>
+            onClick={ () => setTimerType(3) }>
             Long break
           </button> 
         </div>

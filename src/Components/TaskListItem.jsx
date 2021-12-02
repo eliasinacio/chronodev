@@ -10,22 +10,26 @@ export function TaskListItem (props) {
     totalTasks.splice(taskId, 1);
     window.localStorage.setItem('tasks', JSON.stringify(totalTasks));
     props.updateTasks.setTasks(totalTasks);
+    props.updateTasks.getTasks()
   }, [props.updateTasks])
 
   const handleCheckTask = useCallback((taskId) => {
-    console.log('check')
     let totalTasks = props.updateTasks.tasks;
 
     totalTasks[taskId].completed = !(totalTasks[taskId].completed);
 
     window.localStorage.setItem('tasks', JSON.stringify(totalTasks));
     props.updateTasks.setTasks(totalTasks);
+    props.updateTasks.getTasks()
+
   }, [props.updateTasks])
 
   useEffect(() => {
+    console.log('useEffect')
     return () => {
+    console.log('return')
     }
-  }, [])
+  }, [completed])
 
   return (
     <li className="task">
@@ -49,7 +53,7 @@ export function TaskListItem (props) {
             </svg>
           </label>
         
-        <h3 className="task-title" onClick={ () => setTaskBodyIsHidden(!taskBodyIsHidden) }>{title}</h3>
+        <h3 className="task-title" onClick={ () => { if (body !== '') setTaskBodyIsHidden(!taskBodyIsHidden)} }>{title}</h3>
         
         <h4 className="task-cycles">0/{cycles}</h4>
         

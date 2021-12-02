@@ -1,21 +1,21 @@
-import { useState } from 'react'
-
+import { useState, useEffect } from 'react'
 import { NewTaskForm } from './NewTaskForm'
-
-import '../styles/task.scss'
 import { TaskListItem } from './TaskListItem'
-
-import { useEffect } from 'react'
+import '../styles/task.scss'
 
 export function TaskManager () {
   const [ formIsHidden, setFormIsHidden ] = useState(true);
 
   const [ tasks, setTasks ]  = useState([]);
 
-  useEffect( () => {
+  const getTasks = () => {
     setTasks(
       JSON.parse(localStorage.getItem('tasks'))
     )
+  }
+
+  useEffect( () => {
+    getTasks()
   }, []);
 
   return (
@@ -49,7 +49,7 @@ export function TaskManager () {
                             completed={task.completed}
                             key={key}
                             id={key}
-                            updateTasks={{tasks, setTasks}}
+                            updateTasks={{tasks, setTasks, getTasks}}
                           />
                         )})
                     : <p>0 tasks</p> 
