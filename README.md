@@ -7,10 +7,9 @@
 <main>
 <h3> Ideas </h3>
 
-- [x] Pomodoro Timers: 25, 5 and 15 minutes.
-- [x] Alternate cycles.
-- [x] Simple tasks system.
-- [x] Tasks with description.
+- [x] Pomodoro Timer.
+- [x] Alternating cycles.
+- [x] Simple tasks system, with cycles and description.
 - [x] Save tasks locally.
 
 <h3 align='center'> Pomodoro timer </h3>
