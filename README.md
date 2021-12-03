@@ -11,7 +11,7 @@
 - [x] Alternate cycles.
 - [x] Simple tasks system.
 - [x] Tasks with description.
-- [ ] Save tasks locally
+- [x] Save tasks locally.
 
 <h3 align='center'> Pomodoro timer </h3>
 <img src='https://github.com/eliasinacio/react-pomofocus-clone/blob/355d42ea799d451a84960eaf2f79e0a7bfc55a2f/images/home0.png' alt='screen capture, pomodoro timer'>
