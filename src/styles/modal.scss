@@ -1,0 +1,41 @@
+.modalContainer {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+
+  background-color: #3c32539b;
+
+  .modal {
+    width: 100%;
+    max-width: 600px;
+    height: 140px;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+
+    background-color: #424242;
+    border-left: 5px solid tomato;
+    border-radius: 10px;
+
+    h2 { font-size: 20px; }
+
+    p { font-size: 14px; }
+
+    button {
+      width: 60px;
+      height: 30px;
+      margin: 10px;
+      align-self: flex-end;
+
+      padding: 5px;
+      font-size: 14px;
+    }
+  }
+}
