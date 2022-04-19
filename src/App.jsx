@@ -8,6 +8,7 @@ export function App() {
       <Header />
       <Timer />
       <TaskManager />
+      {/* fazer busca e listagem de musicas para tocar / youtube */}
     </div>
   );
 }
