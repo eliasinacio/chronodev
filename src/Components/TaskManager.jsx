@@ -5,7 +5,6 @@ import '../styles/task.scss'
 
 export function TaskManager () {
   const [ formIsHidden, setFormIsHidden ] = useState(true);
-
   const [ tasks, setTasks ]  = useState([]);
 
   const getTasks = () => {
@@ -14,7 +13,7 @@ export function TaskManager () {
     )
   }
 
-  useEffect( () => {
+  useEffect(() => {
     getTasks()
   }, []);
 
@@ -52,7 +51,7 @@ export function TaskManager () {
                             updateTasks={{tasks, setTasks, getTasks}}
                           />
                         )})
-                    : <p>0 tasks</p> 
+                    : <p>No tasks</p> 
               }    
           </ul>
         </div>
