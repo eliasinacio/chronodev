@@ -27,7 +27,8 @@ export function NewTaskForm (props) {
 
   return (
     <form className='newTask-container' onSubmit={ handleSubmitNewTask }>
-      <input
+      <input 
+        type="text"
         name="task-title" 
         placeholder='What do we have for today?'
         value={formFields.title}
